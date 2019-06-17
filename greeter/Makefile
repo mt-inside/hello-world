@@ -1,3 +1,6 @@
+run:
+	cargo run
+
 image:
 	docker build . -t mtinside/hello-world-greeter:latest
 
