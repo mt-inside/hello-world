@@ -15,7 +15,7 @@ defmodule Translator.MixProject do
   def application do
     [
       extra_applications: [:logger],
-      mod: {Translator.Application, []}
+      mod: {Translator, []}
     ]
   end
 

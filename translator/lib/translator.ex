@@ -1,18 +1,14 @@
 defmodule Translator do
-  @moduledoc """
-  Documentation for Translator.
-  """
+  @moduledoc false
 
-  @doc """
-  Hello world.
+  use Application
 
-  ## Examples
+  def start(_type, _args) do
+    children = [
+      Plug.Cowboy.child_spec(scheme: :http, plug: Translator.Router, options: [port: 8080])
+    ]
+    opts = [strategy: :one_for_one, name: Translator.Supervisor]
 
-      iex> Translator.hello()
-      :world
-
-  """
-  def hello do
-    :world
+    Supervisor.start_link(children, opts)
   end
 end
