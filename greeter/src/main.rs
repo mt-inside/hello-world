@@ -4,11 +4,15 @@ extern crate reqwest;
 use gotham::state::State;
 
 pub fn greet_handler(state: State) -> (State, String) {
+    let greeting = reqwest::get("http://translator.default.global:8080")
+        .unwrap()
+        .text()
+        .unwrap();
     let name = reqwest::get("http://namer.default.global:8080")
         .unwrap()
         .text()
         .unwrap();
-    let reply = format!("Hello {}!\n", name);
+    let reply = format!("{} {}!\n", greeting, name);
 
     (state, reply)
 }
